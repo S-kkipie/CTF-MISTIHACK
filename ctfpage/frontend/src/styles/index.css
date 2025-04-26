@@ -1,0 +1,12 @@
+@import "./Battle.css";
+@import "./Combatant.css";
+@import "./global.css";
+@import "./Hud.css";
+@import "./KeyboardMenu.css";
+@import "./Menus.css";
+@import "./SceneTransition.css";
+@import "./SubmissionMenu.css";
+@import "./Team.css";
+@import "./TextMessage.css";
+@import "./TitleScreen.css";
+
