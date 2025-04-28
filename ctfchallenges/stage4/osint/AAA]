@@ -1,0 +1,137 @@
+#!/bin/bash
+
+# Colores para el texto
+ROJO='\033[0;31m'
+VERDE='\033[0;32m'
+AMARILLO='\033[0;33m'
+AZUL='\033[0;34m'
+NC='\033[0m' # Sin Color
+
+# Función para mostrar banners
+mostrar_banner() {
+    clear
+    echo -e "${AMARILLO}"
+    echo "========================================================"
+    echo "=       DESAFÍO DEL TERREMOTO DE AREQUIPA 2001        ="
+    echo "========================================================"
+    echo -e "${NC}"
+}
+
+# Contador de intentos y aciertos
+intentos=0
+aciertos=0
+
+# Función para mostrar pistas
+mostrar_pista() {
+    echo -e "${AZUL}PISTA:${NC} $1"
+    echo ""
+}
+
+# Función para comprobar respuesta
+comprobar_respuesta() {
+    intentos=$((intentos+1))
+    if [ "$1" == "$2" ]; then
+        echo -e "${VERDE}¡CORRECTO!${NC}"
+        aciertos=$((aciertos+1))
+        sleep 1
+        return 0
+    else
+        echo -e "${ROJO}Incorrecto. Inténtalo de nuevo.${NC}"
+        return 1
+    fi
+}
+
+# Inicio del juego
+mostrar_banner
+echo -e "${AMARILLO}Bienvenido al desafío del terremoto de Arequipa 2001${NC}"
+echo "Responde correctamente a todas las preguntas para obtener la flag."
+echo ""
+echo -e "${AMARILLO}Presiona ENTER para comenzar...${NC}"
+read
+
+# Pregunta 1
+mostrar_banner
+echo -e "${AZUL}PREGUNTA 1:${NC}"
+echo "¿A qué hora exacta (en UTC) ocurrió el sismo del 23 de junio de 2001"
+echo "en Arequipa, según el reporte oficial del USGS?"
+echo ""
+mostrar_pista "Busca en USGS \"M 8.4 – near the coast of southern Peru, 2001-06-23\""
+
+respuesta_correcta1="20:33:14"
+while true; do
+    echo -n "Tu respuesta: "
+    read respuesta1
+    comprobar_respuesta "$respuesta1" "$respuesta_correcta1"
+    if [ $? -eq 0 ]; then
+        break
+    fi
+done
+
+# Pregunta 2
+mostrar_banner
+echo -e "${AZUL}PREGUNTA 2:${NC}"
+echo "¿Cuál fue la intensidad máxima Mercalli asignada al evento"
+echo "en el resumen del USGS?"
+echo ""
+mostrar_pista "Misma página del USGS (sección \"Intensities\")"
+
+respuesta_correcta2="IX"
+while true; do
+    echo -n "Tu respuesta: "
+    read respuesta2
+    comprobar_respuesta "$respuesta2" "$respuesta_correcta2"
+    if [ $? -eq 0 ]; then
+        break
+    fi
+done
+
+# Pregunta 3
+mostrar_banner
+echo -e "${AZUL}PREGUNTA 3:${NC}"
+echo "¿Qué elemento arquitectónico emblemático de la Catedral de Arequipa"
+echo "colapsó durante el terremoto, según crónicas periodísticas de 2001?"
+echo ""
+mostrar_pista "Hemeroteca digital de El Comercio o La República (junio-julio 2001)"
+
+respuesta_correcta3="torre_sur"
+while true; do
+    echo -n "Tu respuesta: "
+    read respuesta3
+    comprobar_respuesta "$respuesta3" "$respuesta_correcta3"
+    if [ $? -eq 0 ]; then
+        break
+    fi
+done
+
+# Pregunta 4
+mostrar_banner
+echo -e "${AZUL}PREGUNTA 4:${NC}"
+echo "¿En qué número y año del cómic \"Peter Parker: The Spectacular Spider-Man\""
+echo "Spider-Man arroja al villano Sin-Eater desde lo alto de una catedral?"
+echo ""
+mostrar_pista "Marvel Fandom / Comic Vine / Marvel Unlimited – Buscar la saga \"The Death of Jean DeWolff\""
+
+respuesta_correcta4="#110_1985"
+while true; do
+    echo -n "Tu respuesta: "
+    read respuesta4
+    comprobar_respuesta "$respuesta4" "$respuesta_correcta4"
+    if [ $? -eq 0 ]; then
+        break
+    fi
+done
+
+aciertos=$((aciertos+1))
+
+# Mostrar flag final
+mostrar_banner
+echo -e "${VERDE}¡FELICIDADES! Has completado el desafío.${NC}"
+echo ""
+echo -e "${AMARILLO}Tu flag es:${NC} CAUC{4d1c70_4l_416n1mbr174}"
+echo ""
+echo -e "${AZUL}Estadísticas:${NC}"
+echo "Intentos totales: $intentos"
+echo "Respuestas correctas: $aciertos"
+echo ""
+echo -e "${AMARILLO}Presiona ENTER para salir...${NC}"
+read
